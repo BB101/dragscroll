@@ -1,9 +1,9 @@
 /**
  * @fileoverview dragscroll - scroll area by dragging
  * @version 0.0.8
- * 
+ *
  * @license MIT, see http://github.com/asvd/dragscroll
- * @copyright 2015 asvd <heliosframework@gmail.com> 
+ * @copyright 2015 asvd <heliosframework@gmail.com>
  */
 
 
@@ -39,7 +39,7 @@
         // cloning into array since HTMLCollection is updated dynamically
         dragged = [].slice.call(_document.getElementsByClassName('dragscroll'));
         for (i = 0; i < dragged.length;) {
-            (function(el, lastClientX, lastClientY, pushed, scroller, cont){
+            (function(el, lastClientX, lastClientY, pushed, scroller, cont) {
                 (cont = el.container || el)[addEventListener](
                     mousedown,
                     cont.md = function(e) {
@@ -52,10 +52,11 @@
                             lastClientX = e.clientX;
                             lastClientY = e.clientY;
 
-                            e.preventDefault();
+                            //e.preventDefault();
                         }
                     }, 0
                 );
+                $(cont).attr("unselectable", "on").css("user-select", "none").on("selectstart", false);
 
                 _window[addEventListener](
                     mouseup, cont.mu = function() {pushed = 0;}, 0
@@ -80,7 +81,7 @@
         }
     }
 
-      
+
     if (_document.readyState == 'complete') {
         reset();
     } else {
@@ -89,4 +90,3 @@
 
     exports.reset = reset;
 }));
-
